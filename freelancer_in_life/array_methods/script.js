@@ -226,3 +226,200 @@ let result = arr27.filter(function (item) {
 console.log(result);
 
 // -------------------------------------------------------------------
+
+// Методы сортировки массивов
+// sort() - сортирует массив на месте и возвращает отсортированный массив (изменяет исходный массив)
+// по возрастанию или по убыванию (по умолчанию сортирует по возрастанию) (по умолчанию сортирует как строки)
+
+// Сортировка слов
+let arr28 = ['Petr', 'Vasya', 'Ivan', 'Sidor'];
+console.log(arr28.sort());
+
+// Сортировка чисел
+let arr29 = [1, 55, 34, 22, 4];
+console.log(arr29.sort());
+
+// По умолчанию элементы сортируются как строки
+// Для строк применяется лексикографический порядок
+console.log('2' > '14'); // true
+
+// Для чисел сортировка по умолчанию как строки
+// Для чисел нужно использовать функцию сравнения
+let arr30 = [1, 55, 34, 22, 4];
+
+// Функция сортировки по возрастанию
+function compareNumeric(a, b) {
+  console.log(`a: ${a}, b: ${b}`);
+  // if (a > b) return 1;
+  // if (a == b) return 0;
+  // if (a < b) return -1;
+  return a - b;
+}
+console.log(arr30.sort(compareNumeric));
+
+console.log(arr30.sort((a, b) => a - b));
+
+// Сортировка в обратном порядке (по убыванию) - b - a
+console.log(arr30.sort((a, b) => b - a));
+
+// reverse() - меняет порядок элементов в массиве на обратный (изменяет исходный массив)
+let arr31 = ['Petr', 'Vasya', 'Ivan', 'Sidor'];
+console.log(arr31.reverse());
+
+// -------------------------------------------------------------------
+
+// Методы преобразования массива
+// map() - создает новый массив из результатов вызова функции для каждого элемента массива
+// Если нам нужно перебрать массив и вернуть данные каждого элемента в новый массив
+// Syntax: arr.map(callback) - возвращает новый массив
+// callback - функция, которая будет вызвана для каждого элемента массива
+// let result = arr.map(function(item, index, array) {
+// возвращается новое значение вместо элемента
+// });
+
+let arr32 = ['Petr', 'Vasya', 'Ivan', 'Sidor'];
+let result1 = arr32.map(function (item, index, array) {
+  return item[0];
+});
+console.log(result1);
+
+// Пример
+let arr33 = [1, 2, 3, 4, 5];
+let result2 = arr33.map(function (item) {
+  return item * 2;
+});
+console.log(result2); // [ 2, 4, 6, 8, 10 ]
+
+// Методы split() и join()
+
+// split() - преобразует строку в массив по разделителю
+// Syntax: str.split(separator, limit)
+// separator - разделитель, по которому будет произведено разделение
+// limit - ограничивает количество элементов в массиве
+
+let str = 'Ivan,Petr,Vasya,Sidor';
+let arr34 = str.split(',');
+console.log(arr34);
+
+// Можно ограничить количество объектов которые попадут в массив
+let arr35 = str.split(',', 2);
+console.log(arr35);
+
+// join() - преобразует массив в строку с разделителем между элементами
+// Syntax: arr.join(separator)
+
+let arr36 = ['Ivan', 'Petr', 'Vasya', 'Sidor'];
+let str2 = arr36.join(',');
+console.log(str2); // Ivan,Petr,Vasya,Sidor
+
+// Same effect — convert array to string with String() method (not recommended) — Нельзя использовать разделитель
+let arr37 = ['Ivan', 'Petr', 'Vasya', 'Sidor'];
+let str3 = String(arr37);
+console.log(str3); // Ivan,Petr,Vasya,Sidor
+
+// -------------------------------------------------------------------
+
+// Массива не образуют отдельный тип данных они основаны на объектах
+// Поэтому массивы можно использовать как объекты
+
+let obj = {};
+let arr0 = [];
+console.log(typeof obj); // object
+console.log(typeof arr0); // object
+
+// Как узнать нам где массив а где нет?
+if (Array.isArray(obj)) {
+  console.log('Это массив');
+} else {
+  console.log('Это не массив');
+}
+
+// -------------------------------------------------------------------
+
+// Перебор элементов массива
+
+// Цикл for - перебирает элементы массива по индексу (работает с объектами)
+// Можно использовать для получения и значение и ключa - работает быстрее чем for...of
+// Значение это элемент массива, ключ это индекс элемента
+// Syntax: for (let i = 0; i < arr.length; i++) {}
+
+let arr38 = ['Ivan', 'Petr', 'Vasya', 'Sidor'];
+console.log(arr38.length); // 4
+for (let i = 0; i < arr38.length; i++) {
+  console.log(arr38[i]);
+}
+
+// Цикл for...of - перебирает элементы массива (не работает с объектами)
+// Можно использовать для вывода значений массива
+// Значение это элемент массива
+// Syntax: for (let item of arr) {}
+
+let arr39 = ['Arina', 'Lena', 'Vika', 'Sveta'];
+for (let arrItem of arr39) {
+  console.log(arrItem);
+}
+
+// Метод перебора forEach() - перебирает элементы массива
+// Можно использовать для вывода значений массива
+// Значение это элемент массива
+// Syntax: arr.forEach(function(item, index, array) {})
+//
+
+let arr40 = ['Arina', 'Lena', 'Vika', 'Sveta'];
+arr40.forEach(function (item, index, array) {
+  console.log(`${item} Находится на ${index} Позиции в ${array}`);
+});
+
+// same with =>
+
+arr40.forEach((item, index, array) => {
+  console.log(`${item} Находится на ${index} Позиции в ${array}`);
+});
+
+// При использовании метода forEach() мы можем указывать в скобках имя отдельные функции
+
+let arr41 = ['Ivan', 'Petr', 'Vasya', 'Sidor'];
+
+arr41.forEach(show);
+
+function show(item) {
+  console.log(item);
+}
+// -------------------------------------------------------------------
+
+// Методы reduce() и reduceRight()
+// Методы arr.reduce() и arr.reduceRight() используются для вычисления какого-нибудь единого значения на основе всего массива
+
+// reduce() - используется для вычисления единственного значения на основе всего массива
+
+// Syntax: arr.reduce(function(accumulator, item, index, array) {}, initialValue)
+// accumulator - накопитель, аккумулирующий результат (накапливает результат всех вызовов функции) (может быть любым) — результат предыдущего вызова функции или initialValue
+// item - текущий элемент массива
+// index - индекс текущего элемента массива
+// array - массив, по которому осуществляется проход
+// initialValue - начальное значение аккумулятора
+
+let value = arr41.reduce(function (accumulator, item, index, array) {
+  return accumulator + ' ' + item;
+}, 2); // начальное значение аккумулятора 0 (может быть любым)
+console.log(value);
+
+// Функция применяется по очереди ко всем элементам массива и переносит свой результат на следующий вызов
+
+// Пример 1: Суммирование элементов массива
+const numbers = [1, 2, 3, 4];
+const sum = numbers.reduce((acc, item) => acc + item, 0);
+console.log(sum);
+
+// Пример 2: Конкатенация строк
+const words = ['Hello', 'world', '!'];
+const sentence = words.reduce((acc, item) => `${acc} ${item}`, ''); // начальное значение аккумулятора пустая строка
+console.log(sentence); // Hello world !
+
+// Пример 3: Подсчёт количества уникальных элементов в массиве
+const fruits = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple'];
+const fruitCount = fruits.reduce((acc, fruit) => {
+  acc[fruit] = (acc[fruit] || 0) + 1;
+  return acc;
+}, {}); // начальное значение аккумулятора пустой объект
+console.log(fruitCount); // { apple: 3, banana: 2, orange: 1 }
